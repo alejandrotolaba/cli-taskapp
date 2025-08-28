@@ -3,6 +3,7 @@ import logging
 import argparse
 import json
 from datetime import datetime as dt
+from pathlib import Path
 
 
 # Logger de eventos
@@ -27,6 +28,8 @@ class TaskList:
 		self.tasks:list[dict] = []
 		self.archivo:str = archivo
 		self.last_id:int = 0
+		if not Path(self.archivo).exists():
+			self.save_tasks()
 		self.load_tasks()
 
 	def load_tasks(self):
